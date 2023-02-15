@@ -38,9 +38,10 @@ def test_hand_unhappy():
         Hand(**{f"card{i}": 7 for i in range(5)})
 
 
-def test_hand_happy():
+def test_hand_all_same_cards():
     card = Card(suit="H", value=2)
-    assert Hand(**{f"card{i}": card for i in range(5)})
+    with pytest.raises(ValidationError):
+        assert Hand(**{f"card{i}": card for i in range(5)})
 
 
 def test_hand_from_string_unhappy():
@@ -50,3 +51,11 @@ def test_hand_from_string_unhappy():
 
 def test_hand_from_string_happy():
     assert Hand.from_string("2H 3D 5S 9C KD")
+
+
+def test_card_eq():
+    assert Card(suit="D", value=4) == Card(suit="D", value=4)
+
+
+def test_card_neq():
+    assert Card(suit="D", value=4) != Card(suit="D", value=7)

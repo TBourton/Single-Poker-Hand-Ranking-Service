@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from typing import Literal, get_args
 
-from pydantic import BaseModel
+from pydantic import BaseModel, root_validator
 
 SuitT = Literal["S", "D", "H", "C"]
 ValueT = Literal[2, 3, 4, 5, 6, 7, 8, 9, 10, "J", "Q", "K", "A"]
@@ -49,3 +49,10 @@ class Hand(BaseModel):
                 for i, card in enumerate(cards)
             }
         )
+
+    @root_validator
+    def all_cards_different(cls, values):
+        cards = list(values.values())
+        if any(c == cards[0] for c in cards[1:]):
+            raise ValueError("some cards are the same!")
+        return values

@@ -186,7 +186,7 @@ Description format: `<trips value>`
 
 **8. Two Pair** ~ `[ A♥ A♣ K♦ K♠ 7♥ ]`
 
-Two pair cosists of two cards of the same value, and three extra cards.
+Two pair cosists of two sets of cards of the same value, and one extra card.
 
 Description format: `<high_pair_value> and <low_pair_value>`
 
