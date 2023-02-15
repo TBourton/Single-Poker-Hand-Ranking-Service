@@ -11,6 +11,13 @@ ALLOWED_VALUES = set(get_args(ValueT))
 
 VALUE_MAP = {i: i for i in range(2, 11)} | {11: "J", 12: "Q", 13: "K", 14: "A"}
 VALUE_MAP_INV = {v: k for k, v in VALUE_MAP.items()}
+SUIT_FORMAT_MAP = {"S": "spades", "D": "diamonds", "H": "hearts", "C": "clubs"}
+VALUE_FORMAT_MAP = {i: i for i in range(2, 11)} | {
+    11: "Jack",
+    12: "Queen",
+    13: "King",
+    14: "Ace",
+}
 
 
 class Card(BaseModel):
@@ -68,7 +75,7 @@ class Hand(BaseModel):
             Rank of the form '<rank_name>: <description>.
 
         """
-        return "foo"
+        return self._check_royal_flush() or self._check_straight_flush()
 
     @property
     def cards(self) -> list[Card]:
@@ -114,7 +121,7 @@ class Hand(BaseModel):
             return None
 
         suit = suits.pop()
-        return str(suit)
+        return f"royal flush: {SUIT_FORMAT_MAP[suit]}"
 
     def _check_straight_flush(self) -> Optional[str]:
         suits = set(self.suits)
@@ -126,4 +133,7 @@ class Hand(BaseModel):
             return None
 
         suit = suits.pop()
-        return f"{VALUE_MAP[max_value]}-high {suit}"
+        return (
+            f"straight flush: {VALUE_FORMAT_MAP[max_value]}"
+            f"-high {SUIT_FORMAT_MAP[suit]}"
+        )

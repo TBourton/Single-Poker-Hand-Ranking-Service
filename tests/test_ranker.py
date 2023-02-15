@@ -4,18 +4,22 @@ from hand import Hand
 
 # rank_name, description, hand
 TEST_CASES = [
-    ("royal flush", "hearts", "AH KH QH JH 10H"),
-    ("straight flush", "A-high hearts", "10H JH QH KH AH"),  # with ace high
+    (
+        "royal flush",
+        "hearts",
+        "AH KH QH JH 10H",
+    ),  # same as straight flush with ace high
+    ("straight flush", "King-high hearts", "10H JH QH KH 9H"),
     ("straight flush", "5-high diamonds", "AD 2D 3D 4D 5D"),  # with ace low
-    ("four of a kind", "Q", "QH QD QC QS 10H"),
-    ("full house", "A over K", "AH AD AC KH KS"),
+    ("four of a kind", "Queen", "QH QD QC QS 10H"),
+    ("full house", "Ace over King", "AH AD AC KH KS"),
     ("flush", "S", "KS 2S 3S QS 7S"),
-    ("straight", "A-high", "10C JH QC KS AH"),  # with ace high
+    ("straight", "Ace-high", "10C JH QC KS AH"),  # with ace high
     ("straight", "5-high", "AC 2H 3S 4S 5H"),  # with ace low
-    ("three of a kind", "A", "AH AC AS QS QH"),
-    ("two-pair", "A and K", "AH AC KS KS QH"),
-    ("pair", "A", "AH AC KD JS 7H"),
-    ("high card", "A", "AH KC QD 9S 7H"),
+    ("three of a kind", "Ace", "AH AC AS QS QH"),
+    ("two-pair", "Ace and King", "AH AC KS KS QH"),
+    ("pair", "Ace", "AH AC KD JS 7H"),
+    ("high card", "Ace", "AH KC QD 9S 7H"),
 ]
 
 
