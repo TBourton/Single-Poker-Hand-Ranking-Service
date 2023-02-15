@@ -17,5 +17,4 @@ def test_card(suit: SuitT, value: ValueT):
 @pytest.mark.parametrize("suit", ["foo", 1])
 @pytest.mark.parametrize("value", ["bar", 7])
 def test_card_fail(suit, value):
-    # _ = Card(suit=suit, value=value)
-    pass
+    _ = Card(suit=suit, value=value)
