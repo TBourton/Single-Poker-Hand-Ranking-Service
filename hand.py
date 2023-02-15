@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from typing import Literal, Optional, get_args
 
+import numpy as np
 from pydantic import BaseModel, root_validator
 
 SuitT = Literal["S", "D", "H", "C"]
@@ -75,7 +76,11 @@ class Hand(BaseModel):
             Rank of the form '<rank_name>: <description>.
 
         """
-        return self._check_royal_flush() or self._check_straight_flush()
+        return (
+            self._check_royal_flush()
+            or self._check_straight_flush()
+            or self._check_four_of_a_kind()
+        )
 
     @property
     def cards(self) -> list[Card]:
@@ -137,3 +142,13 @@ class Hand(BaseModel):
             f"straight flush: {VALUE_FORMAT_MAP[max_value]}"
             f"-high {SUIT_FORMAT_MAP[suit]}"
         )
+
+    def _check_four_of_a_kind(self) -> Optional[str]:
+        values, counts = np.unique(self.values, return_counts=True)
+
+        try:
+            quads_value = values[np.argwhere(counts == 4)][0]
+        except IndexError:
+            return None
+
+        return f"four of a kind: {VALUE_FORMAT_MAP[int(quads_value)]}"
