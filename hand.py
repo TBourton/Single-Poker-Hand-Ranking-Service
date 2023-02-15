@@ -1,13 +1,16 @@
 from __future__ import annotations
 
-from typing import Literal, get_args
+from typing import Literal, Optional, get_args
 
 from pydantic import BaseModel, root_validator
 
 SuitT = Literal["S", "D", "H", "C"]
-ValueT = Literal[2, 3, 4, 5, 6, 7, 8, 9, 10, "J", "Q", "K", "A"]
+ValueT = Literal[2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
 ALLOWED_SUITS = set(get_args(SuitT))
 ALLOWED_VALUES = set(get_args(ValueT))
+
+VALUE_MAP = {i: i for i in range(2, 11)} | {11: "J", 12: "Q", 13: "K", 14: "A"}
+VALUE_MAP_INV = {v: k for k, v in VALUE_MAP.items()}
 
 
 class Card(BaseModel):
@@ -17,13 +20,12 @@ class Card(BaseModel):
     @classmethod
     def from_string(cls, string: str) -> Card:
         """Decode a card from string of the format <value><suit>."""
-        print(string)
         suit = string[-1]  # Suit is max 1 char
         value = string[:-1]  # And value is the rest
         try:
             value = int(value)
         except ValueError:
-            pass
+            value = VALUE_MAP_INV.get(value)
 
         return Card(suit=suit, value=value)  # type: ignore
 
@@ -67,3 +69,61 @@ class Hand(BaseModel):
 
         """
         return "foo"
+
+    @property
+    def cards(self) -> list[Card]:
+        return [getattr(self, f"card{i}") for i in range(5)]
+
+    @property
+    def suits(self) -> list[SuitT]:
+        return [card.suit for card in self.cards]
+
+    @property
+    def values(self) -> list[ValueT]:
+        return [card.value for card in self.cards]
+
+    @property
+    def min_value(self) -> ValueT:
+        return min(self.values)
+
+    @property
+    def max_value(self) -> ValueT:
+        return max(self.values)
+
+    @property
+    def max_of_consecutive(self) -> Optional[ValueT]:
+        values = self.values
+        if len(set(values)) != 5:
+            return None  # Values cannot be repeated
+
+        if {14, 2, 3, 4, 5} == set(values):
+            return 5
+
+        if sorted(values) == list(range(min(values), max(values) + 1)):
+            return max(values)
+
+        return None
+
+    def _check_royal_flush(self) -> Optional[str]:
+        suits = set(self.suits)
+        if len(suits) != 1:
+            return None
+
+        values = set(self.values)
+        if values != {14, 13, 12, 11, 10}:
+            return None
+
+        suit = suits.pop()
+        return str(suit)
+
+    def _check_straight_flush(self) -> Optional[str]:
+        suits = set(self.suits)
+        if len(suits) != 1:
+            return None
+
+        max_value = self.max_of_consecutive
+        if not max_value:
+            return None
+
+        suit = suits.pop()
+        return f"{VALUE_MAP[max_value]}-high {suit}"
