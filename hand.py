@@ -80,6 +80,8 @@ class Hand(BaseModel):
             self._check_royal_flush()
             or self._check_straight_flush()
             or self._check_four_of_a_kind()
+            or self._check_full_house()
+            or self._check_flush()
         )
 
     @property
@@ -101,6 +103,17 @@ class Hand(BaseModel):
     @property
     def max_value(self) -> ValueT:
         return max(self.values)
+
+    def _ns_value(self, n: int) -> Optional[ValueT]:
+        """Get n's value, e.g. n=4 gives quad value."""
+        values, counts = np.unique(self.values, return_counts=True)
+
+        try:
+            value = values[np.argwhere(counts == n)][0]
+        except IndexError:
+            return None
+
+        return int(value)  # type: ignore
 
     @property
     def max_of_consecutive(self) -> Optional[ValueT]:
@@ -146,9 +159,27 @@ class Hand(BaseModel):
     def _check_four_of_a_kind(self) -> Optional[str]:
         values, counts = np.unique(self.values, return_counts=True)
 
-        try:
-            quads_value = values[np.argwhere(counts == 4)][0]
-        except IndexError:
+        quads_value = self._ns_value(4)
+        if not quads_value:
             return None
 
-        return f"four of a kind: {VALUE_FORMAT_MAP[int(quads_value)]}"
+        return f"four of a kind: {VALUE_FORMAT_MAP[quads_value]}"
+
+    def _check_full_house(self) -> Optional[str]:
+        trips_value = self._ns_value(3)
+        pair_value = self._ns_value(2)
+        if not pair_value or not trips_value:
+            return None
+
+        return (
+            f"full house: {VALUE_FORMAT_MAP[trips_value]}"
+            f" over {VALUE_FORMAT_MAP[pair_value]}"
+        )
+
+    def _check_flush(self) -> Optional[str]:
+        suits = set(self.suits)
+        if len(suits) != 1:
+            return None
+
+        suit = suits.pop()
+        return f"flush: {SUIT_FORMAT_MAP[suit]}"
