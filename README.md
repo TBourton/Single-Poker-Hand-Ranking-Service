@@ -122,7 +122,7 @@ Please commit your code back to this repository frequently. We expect you to com
 ---
 
 <details>
-<summary>Exercise 1 (45 minutes)</summary>
+<summary>Exercise 1 (Recommended: 1 Hour)</summary>
 
 ---
 
