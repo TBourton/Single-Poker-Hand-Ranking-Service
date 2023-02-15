@@ -35,12 +35,12 @@ def test_card_from_string_unhappy(suit, value):
 
 def test_hand_unhappy():
     with pytest.raises(ValidationError):
-        Hand(**{f"card_{i}": 7 for i in range(5)})
+        Hand(**{f"card{i}": 7 for i in range(5)})
 
 
 def test_hand_happy():
     card = Card(suit="H", value=2)
-    assert Hand(**{f"card_{i}": card for i in range(5)})
+    assert Hand(**{f"card{i}": card for i in range(5)})
 
 
 def test_hand_from_string_unhappy():
