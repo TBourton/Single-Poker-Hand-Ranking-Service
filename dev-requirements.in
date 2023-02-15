@@ -1,0 +1,11 @@
+-c requirements.txt
+hypothesis
+pytest
+pytest-cov
+pytest-randomly
+black
+isort
+flake8
+pydocstyle
+pyright
+httpx
