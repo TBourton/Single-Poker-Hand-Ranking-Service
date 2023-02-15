@@ -1,9 +1,8 @@
 import pytest
 
-from hand import ALLOWED_SUITS, ALLOWED_VALUES, Card, SuitT, ValueT
+from pydantic import ValidationError
 
-print(ALLOWED_VALUES)
-print(ALLOWED_SUITS)
+from hand import ALLOWED_SUITS, ALLOWED_VALUES, Card, SuitT, ValueT
 
 
 @pytest.mark.parametrize("suit", ALLOWED_SUITS)
@@ -17,4 +16,5 @@ def test_card(suit: SuitT, value: ValueT):
 @pytest.mark.parametrize("suit", ["foo", 1])
 @pytest.mark.parametrize("value", ["bar", 7])
 def test_card_fail(suit, value):
-    Card(suit=suit, value=value)
+    with pytest.raises(ValidationError):
+        Card(suit=suit, value=value)
