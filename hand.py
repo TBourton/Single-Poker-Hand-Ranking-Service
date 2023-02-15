@@ -82,6 +82,11 @@ class Hand(BaseModel):
             or self._check_four_of_a_kind()
             or self._check_full_house()
             or self._check_flush()
+            or self._check_straight()
+            or self._check_three_of_a_kind()
+            or self._check_two_pair()
+            or self._check_pair()
+            or self._check_high_card()
         )
 
     @property
@@ -96,16 +101,8 @@ class Hand(BaseModel):
     def values(self) -> list[ValueT]:
         return [card.value for card in self.cards]
 
-    @property
-    def min_value(self) -> ValueT:
-        return min(self.values)
-
-    @property
-    def max_value(self) -> ValueT:
-        return max(self.values)
-
     def _ns_value(self, n: int) -> Optional[ValueT]:
-        """Get n's value, e.g. n=4 gives quad value."""
+        """Get n's value, e.g. n=4 gives quad value, assumes unique."""
         values, counts = np.unique(self.values, return_counts=True)
 
         try:
@@ -183,3 +180,38 @@ class Hand(BaseModel):
 
         suit = suits.pop()
         return f"flush: {SUIT_FORMAT_MAP[suit]}"
+
+    def _check_straight(self) -> Optional[str]:
+        max_consecutive_value = self.max_of_consecutive
+        if not max_consecutive_value:
+            return None
+
+        return f"straight: {VALUE_FORMAT_MAP[max_consecutive_value]}-high"
+
+    def _check_three_of_a_kind(self) -> Optional[str]:
+        trips_value = self._ns_value(3)
+        if not trips_value:
+            return None
+
+        return f"three of a kind: {VALUE_FORMAT_MAP[trips_value]}"
+
+    def _check_two_pair(self) -> Optional[str]:
+        values, counts = np.unique(self.values, return_counts=True)
+        pairs = values[np.argwhere(counts == 2)].reshape(-1)
+        if len(pairs) != 2:
+            return None
+
+        hgh = int(max(pairs))
+        low = int(min(pairs))
+        return f"two pair: {VALUE_FORMAT_MAP[hgh]} and {VALUE_FORMAT_MAP[low]}"
+
+    def _check_pair(self) -> Optional[str]:
+        values, counts = np.unique(self.values, return_counts=True)
+        pair = self._ns_value(2)
+        if not pair:
+            return None
+
+        return f"pair: {VALUE_FORMAT_MAP[pair]}"
+
+    def _check_high_card(self) -> str:
+        return f"high card: {VALUE_FORMAT_MAP[max(self.values)]}"
