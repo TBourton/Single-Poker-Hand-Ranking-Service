@@ -56,3 +56,14 @@ class Hand(BaseModel):
         if any(c == cards[0] for c in cards[1:]):
             raise ValueError("some cards are the same!")
         return values
+
+    def rank(self) -> str:
+        """Rank this hand.
+
+        Returns
+        -------
+        str
+            Rank of the form '<rank_name>: <description>.
+
+        """
+        return "foo"
