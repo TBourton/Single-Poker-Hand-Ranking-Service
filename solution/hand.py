@@ -3,8 +3,9 @@ from __future__ import annotations
 from typing import Optional
 
 import numpy as np
-from card import Card, SuitT, ValueT
 from pydantic import BaseModel, root_validator
+
+from card import Card, SuitT, ValueT
 
 
 class Hand(BaseModel):

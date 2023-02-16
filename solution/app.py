@@ -1,7 +1,8 @@
 from fastapi import APIRouter, FastAPI, HTTPException
 from fastapi.responses import PlainTextResponse
-from hand import Hand
 from pydantic import BaseModel, ValidationError
+
+from hand import Hand
 
 app = FastAPI()
 api_router = APIRouter()

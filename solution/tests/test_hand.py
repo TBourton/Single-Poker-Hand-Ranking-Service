@@ -1,8 +1,9 @@
 import pytest
 
+from pydantic import ValidationError
+
 from card import Card
 from hand import Hand
-from pydantic import ValidationError
 
 
 def test_hand_unhappy():

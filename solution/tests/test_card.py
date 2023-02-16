@@ -2,8 +2,9 @@ from typing import get_args
 
 import pytest
 
-from card import Card, SuitT, ValueT
 from pydantic import ValidationError
+
+from card import Card, SuitT, ValueT
 
 ALLOWED_SUITS = set(get_args(SuitT))
 ALLOWED_VALUES = set(get_args(ValueT))

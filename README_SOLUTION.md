@@ -2,6 +2,21 @@
 
 Developed on Python 3.9. Tests could be expanded in the future to test other py version, e.g. by using tox.
 
+The solution can be found in the `./solution` directory. It contains three modules (+ unit tests):
+- app.py - defines the API endpoint
+- hand.py - defines class for defining a hand made up of 5 cards + the logic for ranking the hand
+- card.py - defines class for defining a card made up of a suit + card value
+
+The main usage is:
+```python
+from hand import Hand
+
+hand = Hand.from_string("2D 7H 9C 9H 9D")
+hand.rank()
+>>> "three of a kind: 9"
+```
+
+
 ## Run the API via run script
 A convenient example run script, `run.sh`, is provided in the top level of this repo.
 This script
@@ -25,6 +40,7 @@ python -m pip install requests
 
 2. In a seperate terminal (or background the app by using `&`). Bring up the app
 ```sh
+cd solution
 uvicorn app:app
 ```
 
@@ -34,7 +50,7 @@ curl -X POST http://127.0.0.1:8000/rank -d '{"hand": "2D 7H 9C 9H 9D"}' -H 'Cont
 >>> "three of a kind: 9"
 ```
 
-## Run the tests:
+## Run the tests
 To run the tests:
 1. Install dependencies
 ```sh
@@ -43,6 +59,7 @@ pip install -r dev-requirements.txt
 ```
 2. Run the test suite
 ```sh
+cd solution
 pytest tests
 ```
 
