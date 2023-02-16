@@ -1,21 +1,21 @@
 from fastapi import APIRouter, FastAPI, HTTPException
 from fastapi.responses import PlainTextResponse
 from hand import Hand
-from pydantic import ValidationError
+from pydantic import BaseModel, ValidationError
 
 app = FastAPI()
 api_router = APIRouter()
 
 
-@api_router.get("/health", status_code=200)
-def health() -> dict:
-    return {"msg": "Healthy"}
+class HandBody(BaseModel):
+    hand: str
 
 
 @api_router.post("/rank", response_class=PlainTextResponse)
-def rank(hand: str) -> str:
+def rank(body: HandBody) -> str:
+    hand_str = body.hand
     try:
-        return Hand.from_string(hand).rank()
+        return Hand.from_string(hand_str).rank()
     except (ValueError, ValidationError) as exp:
         raise HTTPException(500, str(exp)) from exp
 

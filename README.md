@@ -218,7 +218,7 @@ Result: "full house: 4 over 2"
 ~
 
 Query: "6H 7H 8H 9H 10H"
-Result: "straight flush: 10-high diamonds"
+Result: "straight flush: 10-high hearts"
 ```
 
 </details>

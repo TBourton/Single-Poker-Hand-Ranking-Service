@@ -19,7 +19,11 @@ class Hand(BaseModel):
         """Decode a hand from string of the format, e.g. "2H 3D 5S 9C KD"."""
         cards = string.split(delimiter)
         if len(cards) != 5:
-            raise ValueError(f"Expected format '2H 3D 5S 9C KD', got {string}")
+            raise ValueError(
+                f"Expected format '<v><s> <v><s> <v><s> <v><s>'"
+                f" where <v> is card value 2,3,...,10,J,Q,K,A"
+                f" and <s> is suit D,H,S,C. Got {string}"
+            )
 
         return Hand(
             **{

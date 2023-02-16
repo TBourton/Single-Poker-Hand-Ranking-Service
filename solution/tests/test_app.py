@@ -25,7 +25,7 @@ def test_health(client: TestClient):
 
 def test_rank_happy(client: TestClient):
     hand = "2H 3D 5S 9C KD"
-    resp = client.post("/rank", params={"hand": hand})
+    resp = client.post("/rank", json={"hand": hand})
     print(resp.text)
     assert resp.status_code == 200
 
@@ -34,5 +34,5 @@ def test_rank_happy(client: TestClient):
 
 @pytest.mark.parametrize("hand", ["foo", "22H 333333D 5S 9C KD"])
 def test_rank_unhappy(client: TestClient, hand: str):
-    resp = client.post("/rank", params={"hand": hand})
+    resp = client.post("/rank", json={"hand": hand})
     assert resp.status_code == 500
