@@ -7,7 +7,9 @@ The solution can be found in the `./solution` directory. It contains three modul
 - hand.py - defines class for defining a hand made up of 5 cards + the logic for ranking the hand
 - card.py - defines class for defining a card made up of a suit + card value
 
-The main usage is:
+
+## Run the python module directly
+Navigate to the correct directory `cd solution`. The python hand ranker module can be run directly:
 ```python
 from hand import Hand
 
