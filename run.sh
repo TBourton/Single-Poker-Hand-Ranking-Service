@@ -5,7 +5,7 @@ python -m pip install requests
 
 cd solution
 
-uvicorn app:app &
+uvicorn --log-level=critical app:app &
 app_pid=$!
 sleep 1
 
@@ -14,7 +14,5 @@ cd ..
 python3 query.py
 
 
-echo ${app_pid}
-kill ${app_pid}
-
-sleep 0.2
+kill $app_pid
+wait $app_pid 2>/dev/null
