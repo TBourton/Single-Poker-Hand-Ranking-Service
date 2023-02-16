@@ -26,7 +26,6 @@ def test_health(client: TestClient):
 def test_rank_happy(client: TestClient):
     hand = "2H 3D 5S 9C KD"
     resp = client.post("/rank", json={"hand": hand})
-    print(resp.text)
     assert resp.status_code == 200
 
     assert resp.text == "high card: King"
