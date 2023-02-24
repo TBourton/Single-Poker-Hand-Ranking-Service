@@ -1,142 +1,13 @@
-# Coding Test
+# Single Poker Hand Ranking Service (Giff Gaff takehome solution)
 
-Hi Thomas Bourton!
-
-Software engineering is at the heart of what we do here at giffgaff. Our agile engineering teams build and support a wide variety of applications and services. These combine to create our unique user experience on the giffgaff website, enable a whole range of awesome features via modern APIs and, additionally, enable our internal teams to work in the most productive and efficient ways.
-
-The quality and maintainability of our software is very important to us, so we are looking for engineers with real-world experience of building and running contemporary software, especially in terms of the whole development lifecycle. You will help us to design and implement tightly focussed APIs, user interfaces, services that internalise our core business logic or internal tools and, together with your team, you will support them in production. We want you to share your opinions on how we are doing things - and help us get better!
-
-## Have you got what it takes?
-
-<details>
-  <summary>Basic Expectations</summary>
-  <br/>
-  <ul>
-    <li>Love delivering a wow to our members</li>
-    <li>Ability to communicate clearly</li>
-    <li>Be curious & creative</li>
-    <li>Have excellent attention to detail</li>
-    <li>Have an interest in technology, mobile and wider popular culture trends</li>
-    <li>Able to work under pressure and manage workloads effectively</li>
-    <li>Organised, self motivated and accountable for own workload</li>
-    <li>A strong team player</li>
-  </ul>
-  <br/>
-</details>
-<details>
-  <summary>Key Attributes & Behaviours</summary>
-  <br/>
-  <strong>Community & Connectedness</strong>
-  <p>A person with community & connectedness skills has a sense of being part of a larger whole, a desire to contribute, a sense that the other people (i.e. coworkers, users, members) are not simply characters in his or her own movie, but fully-realised individuals.</p>
-  <ul>
-    <li>Coach & Mentor</li>
-    <li>Courageous & Honest</li>
-    <li>Code with Empathy</li>
-    <li>Open Source Approach</li>
-  </ul>
-  <br/>
-  <strong>Leadership</strong>
-  <p>A person with leadership skills knows how to develop and follow a sense of purpose, in themselves and in others. They are willing to point out, own, and fix things that are broken about our company and in their own career tracks.</p>
-  <ul>
-    <li>An Owner’s Mindset</li>
-    <li>Good at Persuasion</li>
-    <li>A Sense of Purpose</li>
-    <li>Do the Next Right-Thing</li>
-  </ul>
-  <br/>
-  <strong>Technical Capability</strong>
-  <p>A person with high technical capability is technically curious, tackles problems without giving up, and produces solutions that less-experienced folks can use, maintain, and learn from.</p>
-  <ul>
-    <li>Creative & Curious</li>
-    <li>Disciplined & Rigorous</li>
-    <li>Fearless & Pragmatic</li>
-    <li>Good at Problem Solving</li>
-    <li>A Propensity to Ship</li>
-  </ul>
-  <br/>
-</details>
-<details>
-  <summary>Core Engineering Skills</summary>
-  <br/>
-  <table>
-    <tr><td rowspan="4" valign="top">Must Have</td><td>Reading & Writing Code</td></tr>
-    <tr><td>Variables & Control Structures</td></tr>
-    <tr><td>Debugging & Troubleshooting</td></tr>
-    <tr><td>IDE & OS Basics</td></tr>
-    <tr><td rowspan="4" valign="top">Should Have</td><td>Test Driven Development</td></tr>
-    <tr><td>Pair Programming</td></tr>
-    <tr><td>Clean Code & Refactoring</td></tr>
-    <tr><td>Version Control</td></tr>
-    <tr><td rowspan="6" valign="top">Could Have</td><td>Continuous Integration & Deployment</td></tr>
-    <tr><td>Algorithms & Data Structures</td></tr>
-    <tr><td>Dependency Injection</td></tr>
-    <tr><td>Mocks & Stubs</td></tr>
-    <tr><td>Alerting & Monitoring</td></tr>
-    <tr><td>Functional & Non-Functional Testing</td></tr>
-    <tr><td rowspan="4" valign="top">Would Like</td><td>SOLID Principles</td></tr>
-    <tr><td>Containerisation & Networking Basics</td></tr>
-    <tr><td>Twelve Factor App Design</td></tr>
-    <tr><td>Solution Architecture</td></tr>
-  </table>
-</details>
-<details>
-  <summary>Our Technology Stack</summary>
-  <br/>
-  <table>
-    <tr><td rowspan="8" valign="top">Client-Side</td><td>CSS3</td></tr>
-    <tr><td>ECMAScript (ES6+)</td></tr>
-    <tr><td>HTML5</td></tr>
-    <tr><td>Jest</td></tr>
-    <tr><td>React</td></tr>
-    <tr><td>React Native</td></tr>
-    <tr><td>SASS</td></tr>
-    <tr><td>TypeScript</td></tr>
-    <tr><td rowspan="6" valign="top">Server-Side</td><td>Java 8 with Maven</td></tr>
-    <tr><td>JUnit</td></tr>
-    <tr><td>Node JS</td></tr>
-    <tr><td>PHP & Laravel</td></tr>
-    <tr><td>Python</td></tr>
-    <tr><td>Spring Framework</td></tr>
-    <tr><td rowspan="8" valign="top">Additional</td><td>Apache & NGINX</td></tr>
-    <tr><td>AWS</td></tr>
-    <tr><td>Jenkins</td></tr>
-    <tr><td>DynamoDB, PostgreSQL, Redis & Oracle</td></tr>
-    <tr><td>Docker & Kubernetes</td></tr>
-    <tr><td>ElasticSearch & Kibana</td></tr>
-    <tr><td>Grafana & Prometheus</td></tr>
-    <tr><td>Kinesis</td></tr>
-  </table>
-</details>
-
-## The Challenge
-
-We would like you to complete the following coding exercise.
-
-You can use any programming language you like. Ideally your solution will include unit tests, preferably written using a [test-driven development](https://en.wikipedia.org/wiki/Test-driven_development) approach. The code related to your solution should be placed in a subfolder and be easy to execute - ideally **clone** → **install** → **run**
-
-Please commit your code back to this repository frequently. We expect you to complete this exercise within a day, but if takes a little longer don't worry - just let us know when you're done.
-
-> NOTE: Due to 2FA if you're using HTTPS to access this repo, you must create a personal access token to use as a password when [authenticating to GitHub on the command line using HTTPS](https://help.github.com/en/github/authenticating-to-github/accessing-github-using-two-factor-authentication#authenticating-on-the-command-line-using-https) URLs.
-
-
----
-
-<details>
-<summary>Exercise 1 (Recommended: 1 Hour)</summary>
-
----
-
-## Single Poker Hand Ranking Service
-
-### Requirements:
-
-You have to implement a poker hand ranking service:
-- Write an algorithm that takes a hand of cards and identifies the ranking of the given hand.
-- Expose an API to serve this algorithm via an endpoint `/rank`, that accepts a valid poker hand and returns its ranking.
-- Rank information should be formatted as `<rank_name>: <description>`, see description format for each different rank below.
+## Problem
+The code in this repo does the following:
+- Takes a hand of cards and identifies the ranking of the given hand.
+- Expose this algorithm via an endpoint `/rank`, that accepts a valid poker hand and returns its ranking.
+- Rank information is formatted as `<rank_name>: <description>`, see description format for each different rank below.
 <br>
 
-### Rules:
+### Hand Ranking Rules
 
 A poker hand consists of 5 cards dealt from a deck. A deck is composed of 52 cards ordered as `2 through 10`, `J` (*Jack*), `Q` (*Queen*), `K` (*King*), and `A` (*Ace*); and split across 4 suits: *♠ Spades* (black), *♦ Diamonds* (red), *♣ Clubs* (black), and *♥ Hearts* (red).
 
@@ -221,11 +92,85 @@ Query: "6H 7H 8H 9H 10H"
 Result: "straight flush: 10-high hearts"
 ```
 
-</details>
+# Installation instructions and explanation
 
----
+The solution can be found in the `./solution` directory. It contains three modules (+ unit tests):
+- app.py - defines the API endpoint
+- hand.py - defines class for defining a hand made up of 5 cards + the logic for ranking the hand
+- card.py - defines class for defining a card made up of a suit + card value
 
 
-Good Luck!
+## Run the python module directly
+Navigate to the correct directory `cd solution`. The python hand ranker module can be run directly:
+```python
+from hand import Hand
 
-#### Generated for [TBourton](https://github.com/TBourton) on Wed Feb 15 2023 10:04:16 GMT+0000 (Coordinated Universal Time)
+hand = Hand.from_string("2D 7H 9C 9H 9D")
+hand.rank()
+>>> "three of a kind: 9"
+```
+
+
+## Run the API via run script
+A convenient example run script, `run.sh`, is provided in the top level of this repo.
+This script
+- Installs dependencies
+- Brings up the API, served via uvicorn
+- Runs some example querys (via calling query.py)
+- Brings down the API.
+
+Run it using
+```sh
+./run.sh
+```
+
+## Run the API standalone
+To standup and run the API:
+1. Install the requirements
+```sh
+python -m pip install -r requirements.txt
+python -m pip install requests
+```
+
+2. In a seperate terminal (or background the app by using `&`). Bring up the app
+```sh
+cd solution
+uvicorn app:app
+```
+
+3. Hit the app with a query. For example, using `curl`,
+```sh
+curl -X POST http://127.0.0.1:8000/rank -d '{"hand": "2D 7H 9C 9H 9D"}' -H 'Content-Type: application/json'
+>>> "three of a kind: 9"
+```
+
+## Run the tests
+To run the tests:
+1. Install dependencies
+```sh
+pip install -r requirements.txt
+pip install -r dev-requirements.txt
+```
+2. Run the test suite
+```sh
+cd solution
+pytest tests
+```
+
+## Development
+
+### Pre-commit hook
+For development the pre-commit hook should be installed. To install it:
+```sh
+pip install pre-commit
+pre-commit install
+```
+Update it with `pre-commit autoupdate`.
+
+### Update dependencies
+For simplicity, `pip-tools` is used for dependency management. To upgrade reqs files:
+```sh
+pip install pip-tools
+pip-compile --no-emit-find-links --no-emit-index-url requirements.in -o requirements.txt
+pip-compile --no-emit-find-links --no-emit-index-url dev-requirements.in -o dev-requirements.txt
+```
